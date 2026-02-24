@@ -3,21 +3,7 @@ Sistema baseado em arquitetura de microsserviços que realiza o cadastro de usu�
 
 📐 Arquitetura
 
-
-Cliente HTTP
-     │
-     ▼
-┌─────────────┐       RabbitMQ        ┌──────────────┐
-│  MS - User  │ ─── (fila: default.email) ──▶ │  MS - Email  │
-│  Porta 8081 │                       │  Porta 8082  │
-└──────┬──────┘                       └──────┬───────┘
-       │                                     │
-       ▼                                     ▼
-  PostgreSQL                           PostgreSQL
-  (ms-user)                            (ms-email)
-                                             │
-                                             ▼
-                                       SMTP (Gmail)
+<img width="491" height="300" alt="image" src="https://github.com/user-attachments/assets/0c64e10a-d408-4590-8dec-bedde8225c9d" />
 
 O microsserviço user expõe uma API REST para cadastro de usuários. Após salvar o usuário no banco de dados, publica uma mensagem na fila do RabbitMQ. O microsserviço email escuta essa fila, envia o e-mail de boas-vindas via SMTP e registra o resultado no seu próprio banco de dados.
 

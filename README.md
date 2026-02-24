@@ -8,30 +8,8 @@ Sistema baseado em arquitetura de microsserviços que realiza o cadastro de usu�
 O microsserviço user expõe uma API REST para cadastro de usuários. Após salvar o usuário no banco de dados, publica uma mensagem na fila do RabbitMQ. O microsserviço email escuta essa fila, envia o e-mail de boas-vindas via SMTP e registra o resultado no seu próprio banco de dados.
 
 🗂️ Estrutura do Projeto
-microsservicos-envio-email/
-├── user/               # Microsserviço de usuários
-│   ├── src/main/java/com/ms/user/
-│   │   ├── controllers/    # Endpoints REST
-│   │   ├── services/       # Regras de negócio
-│   │   ├── producers/      # Publicação de mensagens no RabbitMQ
-│   │   ├── models/         # Entidade JPA
-│   │   ├── dtos/           # Objetos de transferência de dados
-│   │   ├── repositories/   # Acesso ao banco de dados
-│   │   └── configs/        # Configuração do RabbitMQ
-│   └── src/main/resources/
-│       └── application.properties
-│
-└── email/              # Microsserviço de e-mail
-    ├── src/main/java/com/ms/email/
-    │   ├── consumers/      # Consumidor da fila RabbitMQ
-    │   ├── services/       # Lógica de envio de e-mail
-    │   ├── models/         # Entidade JPA
-    │   ├── dtos/           # Objetos de transferência de dados
-    │   ├── repositories/   # Acesso ao banco de dados
-    │   ├── enums/          # Status do envio (SENT / ERROR)
-    │   └── configs/        # Configuração do RabbitMQ
-    └── src/main/resources/
-        └── application.properties
+<img width="558" height="468" alt="image" src="https://github.com/user-attachments/assets/1f97b902-c575-4233-8731-7f8c73e79a76" />
+
 
 🚀 Tecnologias Utilizadas
 
@@ -62,63 +40,19 @@ CREATE DATABASE "ms-email";
 
 Microsserviço user — application.properties
 
-propertiesspring.application.name=user
-server.port=8081
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/ms-user
-spring.datasource.username=SEU_USUARIO
-spring.datasource.password=SUA_SENHA
-spring.jpa.hibernate.ddl-auto=update
-
-spring.rabbitmq.addresses=amqps://SEU_ENDERECO_CLOUDAMQP
-
-broker.queue.email.name=default.email
+<img width="545" height="219" alt="image" src="https://github.com/user-attachments/assets/8e0d8609-7e3d-4982-8e31-62788eccc54a" />
 
 Microsserviço email — application.properties
 
-propertiesspring.application.name=email
-server.port=8082
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/ms-email
-spring.datasource.username=SEU_USUARIO
-spring.datasource.password=SUA_SENHA
-spring.jpa.hibernate.ddl-auto=update
-
-spring.rabbitmq.addresses=amqps://SEU_ENDERECO_CLOUDAMQP
-
-broker.queue.email.name=default.email
-
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=SEU_EMAIL@gmail.com
-spring.mail.password=SENHA_DE_APP_GMAIL
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
+<img width="543" height="363" alt="image" src="https://github.com/user-attachments/assets/692061c2-238e-4efa-a131-36fa84cca12e" />
 
 ▶️ Como Executar
 Execute cada microsserviço em um terminal separado, a partir da raiz do respectivo módulo:
-bash# Terminal 1 — Microsserviço de usuário
-cd user
-./mvnw spring-boot:run
-
-# Terminal 2 — Microsserviço de e-mail
-cd email
-./mvnw spring-boot:run
+<img width="396" height="145" alt="image" src="https://github.com/user-attachments/assets/e48c7fe5-2b68-4214-886b-7430593b7afa" />
 
 📡 Endpoints
-POST /users — Cadastrar usuário
-URL: http://localhost:8081/users
-Body (JSON):
-json{
-  "name": "João Silva",
-  "email": "joao.silva@exemplo.com"
-}
-Resposta (201 Created):
-json{
-  "userId": "a1b2c3d4-e5f6-...",
-  "name": "João Silva",
-  "email": "joao.silva@exemplo.com"
-}
+<img width="336" height="259" alt="image" src="https://github.com/user-attachments/assets/b811c40a-f094-44ab-b157-c60c2cc72613" />
+
 Após o cadastro, o usuário receberá automaticamente um e-mail de boas-vindas com o assunto "Cadastro realizado com sucesso".
 
 🔄 Fluxo de Processamento

@@ -8,6 +8,7 @@ Sistema baseado em arquitetura de microsserviços que realiza o cadastro de usu�
 O microsserviço user expõe uma API REST para cadastro de usuários. Após salvar o usuário no banco de dados, publica uma mensagem na fila do RabbitMQ. O microsserviço email escuta essa fila, envia o e-mail de boas-vindas via SMTP e registra o resultado no seu próprio banco de dados.
 
 🗂️ Estrutura do Projeto
+
 <img width="558" height="468" alt="image" src="https://github.com/user-attachments/assets/1f97b902-c575-4233-8731-7f8c73e79a76" />
 
 
@@ -48,9 +49,11 @@ Microsserviço email — application.properties
 
 ▶️ Como Executar
 Execute cada microsserviço em um terminal separado, a partir da raiz do respectivo módulo:
+
 <img width="396" height="145" alt="image" src="https://github.com/user-attachments/assets/e48c7fe5-2b68-4214-886b-7430593b7afa" />
 
 📡 Endpoints
+
 <img width="336" height="259" alt="image" src="https://github.com/user-attachments/assets/b811c40a-f094-44ab-b157-c60c2cc72613" />
 
 Após o cadastro, o usuário receberá automaticamente um e-mail de boas-vindas com o assunto "Cadastro realizado com sucesso".
